@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{session['status_jugador']}}</title>
+</head>
+<body>
+    <div class="principal">
+      <form action="/limpiar">
+        <h1>resultado del juego : {{session['status_jugador']}}</h1>
+        <br>
+        <h3>numero de intentos : {{session['intentos']}}</h3>
+        <br>
+        <h3>cantidad de oro : {{session['oro']}}</h3>
+        <br>
+        <button type="submit">jugar otra partida</button>
+      </form>
+    </div>
+</body>
+</html>

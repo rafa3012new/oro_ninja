@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DemoFlask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/juego_oro_ninja.css') }}" type="text/css">
+
+</head>
+<body>
+
+    <div class="principal">
+
+      <div class="cabecera">
+        <div id="divicon"><img id="iconapp" src="{{ url_for('static', filename= 'img/icon_codingdojo.png') }}" alt="imagen de icono no encontrado"></div>
+        <div><h1>Bienvenido al juego de Oro Ninja</h1></div>
+      </div>
+
+      <div class="contenedor_cabecera">
+        <div class="indicador_oro">
+            <div><h1>Tu Oro</h1></div>
+            <div><h1 id="cantidad_oro">{{session['oro']}}</h1></div>
+        </div>
+
+        <div id="ganascon"><h2 style="color: dodgerblue;">Ganas con 250 de oro en 15 intentos</h2></div>
+
+        <div class="contenedor_resetear">
+            <a href="/limpiar">Resetear_juego</a>
+        </div>
+      </div>
+
+      <div class="contenedor_formulario">
+        <div class="formulario">
+          <form action="/procesar_money" method="post" name="form_granja">
+            <div class="titulo_formulario">Granja</div>
+            <div class="descripcion_formulario">(Gana 10-20 de oro)</div>
+            <input type="hidden" id="bgranja" name="bform" value="granja">
+            <div class="boton_formulario"><button type="submit">Buscar oro!</button></div>
+          </form>
+        </div>
+        <div class="formulario">
+          <form action="/procesar_money" method="post">
+            <div class="titulo_formulario">Cueva</div>
+            <div class="descripcion_formulario">(Gana 5-10 de oro)</div>
+            <input type="hidden" id="bcueva" name="bform" value="cueva">
+            <div class="boton_formulario"><button type="submit">Buscar oro!</button></div>
+          </form>
+        </div>
+        <div class="formulario">
+          <form action="/procesar_money" method="post">
+            <div class="titulo_formulario">Casa</div>
+            <div class="descripcion_formulario">(Gana 2-5 de oro)</div>
+            <input type="hidden" id="bcasa" name="bform" value="casa">
+            <div class="boton_formulario"><button type="submit">Buscar oro!</button></div>
+          </form>
+        </div>
+        <div class="formulario">
+          <form action="/procesar_money" method="post">
+            <div class="titulo_formulario">Casino</div>
+            <div class="descripcion_formulario">(Gana/Pierde 0-50 de oro)</div>
+            <input type="hidden" id="bcasino" name="bform" value="casino">
+            <div class="boton_formulario"><button type="submit">Buscar oro!</button></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="actividades">
+        <p>Intentos</p>
+        <div class="div_ul">
+          <ol>
+            {%if session['movimientos_oro']|length == 0%}
+            <li></li>
+            {%else%}
+              {%for i in session['movimientos_oro']|reverse%}
+                {%if i['opcion'] == 'Gano' %}
+                  <li class="ligano">{{i['opcion']}} {{i['cantidad']}} de oro en {{i['proveniente']}}! ({{i['fecha']}})</li>
+                {%else%}
+                  <li class="liperdio">{{i['opcion']}} {{i['cantidad']}} de oro en {{i['proveniente']}}! ({{i['fecha']}})</li>
+                {%endif%}
+              {%endfor%}
+            {%endif%}
+          </ol>
+        </div>
+      </div>
+
+    </div>
+</body>
+</html>
